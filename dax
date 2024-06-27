@@ -59,3 +59,31 @@ CALCULATE(
 
 return varianta3
 
+______________________________________________________________________
+
+02 suma srazek mesic 7 = 
+
+-- takto NE
+-- zde nedochazi ke zruseni pripadneho filtru nad sloupcem [mesic]
+VAR varianta1 = 
+CALCULATE(
+    SUM(data[Srazky]),
+    FILTER(data,
+        data[mesic] = 7))
+-- takto ANO, pokud nefunguje varianta3
+-- zde nedochazi ke zruseni pripadneho filtru nad sloupcem [mesic]
+VAR varianta2 = 
+CALCULATE(
+    SUM(data[Srazky]),
+    FILTER(
+        VALUES(data[mesic]),
+    data[mesic] = 7)) 
+
+-- takto ANO
+-- zde dochazi ke zruseni pripadneho filtru nad sloupcem [mesic]
+VAR varianta3 =
+CALCULATE(
+    SUM(data[Srazky]),
+    data[mesic] = 7)
+
+RETURN varianta2
