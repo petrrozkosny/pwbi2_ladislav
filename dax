@@ -129,3 +129,19 @@ CONCATENATEX(
     FILTER(_tabulka,
     [srazky] = _maximalni_srazky),
     data[Lokalita],", ")
+
+_________________________________________
+
+27 nejsrazkovejsi lokalita = 
+
+VAR _tabulka = 
+ADDCOLUMNS(
+    ALL(data[Lokalita]),
+"rocni srazky",
+CALCULATE(SUM(data[Srazky])))
+
+VAR _maximalni_hodnota = MAXX(_tabulka,[rocni srazky])
+
+RETURN
+CONCATENATEX(
+    FILTER(_tabulka,[rocni srazky] = _maximalni_hodnota),data[Lokalita],", ")
