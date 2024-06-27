@@ -1,0 +1,25 @@
+dim_datumy = 
+--krok4: ADDCOLUMNS() přidává sloupce do tabulky vrácené funkcí ADDCOLUMNS()
+ADDCOLUMNS(
+    --krok3: ADDCOLUMNS() přidává sloupce do tabulky vrácené funkcí SELECTCOLUMNS()
+    ADDCOLUMNS(
+        --krok2: SELECTCOLUMNS() vybírá sloupec [date] vrácený funkcí CALENDARAUTO()
+        -- a vrací jej jako sloupec [datum]
+        SELECTCOLUMNS(
+            --krok1: CALENDARAUTO() vrací tabulku se sloupcem [date]
+            CALENDARAUTO(),
+        "datum",[Date]),
+    "rok",YEAR([datum]),
+    "mesic",MONTH([datum]),
+    "den",DAY([datum]),
+    "tyden",WEEKNUM([datum],21),
+    "den tydne",WEEKDAY([datum],2)),
+"pracovni den",
+SWITCH(TRUE(),
+[den tydne] > 5,FALSE(),
+[mesic] = 5 && [den] = 8,FALSE(),
+[mesic] = 5 && [den] = 1,FALSE(),
+[datum] IN {
+    DATE(2020,04,13),
+    DATE(2019,04,20)
+    },FALSE(),TRUE()))
