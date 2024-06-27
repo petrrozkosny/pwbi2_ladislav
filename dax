@@ -107,3 +107,25 @@ CALCULATE(
     ALL(dim_lokality[Zeme]),ALL(dim_datumy[rok]))
 
 RETURN varianta2
+
+________________________________________________________
+
+26 nejsrazkovejsi lokalita = 
+-- lokality s nejvyssimi rocnimi srazkami
+
+VAR _tabulka =
+    ADDCOLUMNS(
+        ALL(data[Lokalita]),
+    "srazky",
+    CALCULATE(SUM(data[Srazky])))
+
+VAR _maximalni_srazky = 
+    MAXX(
+        _tabulka,
+    [srazky])
+
+RETURN
+CONCATENATEX(
+    FILTER(_tabulka,
+    [srazky] = _maximalni_srazky),
+    data[Lokalita],", ")
