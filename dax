@@ -87,3 +87,23 @@ CALCULATE(
     data[mesic] = 7)
 
 RETURN varianta2
+
+_________________________________________________________
+
+07 suma srazek vse = 
+
+-- za vsechny zeme, roky
+
+-- takto NE
+VAR varianta1 = 
+CALCULATE(
+    SUM(data[Srazky]),
+    ALL(data))
+
+-- takto ANO
+VAR varianta2 =
+CALCULATE(
+    SUM(data[Srazky]),
+    ALL(dim_lokality[Zeme]),ALL(dim_datumy[rok]))
+
+RETURN varianta2
