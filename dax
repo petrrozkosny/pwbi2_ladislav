@@ -23,3 +23,39 @@ SWITCH(TRUE(),
     DATE(2020,04,13),
     DATE(2019,04,20)
     },FALSE(),TRUE()))
+
+_________________________________________________
+
+Míra = 
+
+VAR predchozi_rok = SELECTEDVALUE(data[rok]) - 1
+
+-- takto NE
+VAR varianta1 = 
+CALCULATE(
+    --krok3: SUM() scita sloupec [Srazky] tabulky vracene funkci FILTER()
+    SUM(data[Srazky]),
+    --krok2: Funkce FILTER() nastavuje filtry na sloupce tabulky vracene funkci ALL() a vraci tabulku
+    FILTER(
+        --krok1: Funkce ALL() vrati kopii tabulky data zbavenou vsech filtru
+        ALL(data),
+    data[Lokalita] = SELECTEDVALUE(data[Lokalita])
+    && data[rok] = predchozi_rok))
+
+
+-- takto ANO pokud nefunguje varianta3
+VAR varianta2 = 
+CALCULATE(
+    SUM(data[Srazky]),
+    FILTER(
+        ALL(data[rok]),
+    data[rok] = predchozi_rok))
+
+-- takto ANO
+VAR varianta3 = 
+CALCULATE(
+    SUM(data[Srazky]),
+    data[rok] = predchozi_rok)
+
+return varianta3
+
