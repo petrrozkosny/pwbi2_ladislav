@@ -1,0 +1,6 @@
+37 suma srazek ruzyne = suma srazek v danem roce, mesici, lokalita RUZYNE
+38 suma srazek kumulativne ruzyne = suma srazek v lokalita RUZYNE, danem roce, danem a předchozích mesicich
+39 suma srazek mezirocne ruzyne = suma srazek v danem roce, mesici,lokalite ruzyne minus suma srazek v předchozím roce, danem mesici,lokalita ruzyne
+40 suma srazek předchozí mesic ruzyne = suma srazek v předchozím mesici v lokalite ruzyne
+41 datumy nejvyšších srazek  = všechny datumy, ve kterých napadly maximalni srazky za dany mesic, rok
+42 nejsrazkovejsi lokality  všechny lokality, jejichž suma mesicnich srazek v danem roce, mesici se rovnala maximálním mesicnim srazkem
