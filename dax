@@ -163,3 +163,17 @@ return
 SWITCH(TRUE(),
 SUM(data[Srazky]) = _max_srazky,"GOLD",
 SUM(data[Srazky]) = _min_srazky,"GRAY")
+
+_______________________________________________________
+
+
+kontrola filtru = 
+
+SWITCH(
+    -- hledám výsledek TRUE
+    TRUE(),
+    HASONEFILTER(obdobi[typ_obdobi]),
+    "Super, počítám",
+    ISFILTERED(obdobi[typ_obdobi]),
+    "Vyber jednu",
+    "Vyber typ obdobi")
