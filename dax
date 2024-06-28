@@ -191,3 +191,19 @@ ADDCOLUMNS(
 "kvartal",QUARTER([datum]),
 "den_tydne",WEEKDAY([datum],2),
 "cislo_tydne",WEEKNUM([datum],21))
+
+_________________________________________________________________
+
+_52 suma srazek obdobi = 
+
+
+VAR foo = CALCULATE(ISFILTERED(obdobi[typ_obdobi]),ALLSELECTED(obdobi[typ_obdobi]))
+
+VAR vypocet = 
+SWITCH(SELECTEDVALUE(obdobi[typ_obdobi]),
+"prubezne",
+SUM(data[Srazky]),
+"kumulativne",
+TOTALYTD(SUM(data[Srazky]),dim_datumy[datum]))
+
+return if(foo = TRUE(),vypocet,BLANK())
